@@ -77,7 +77,7 @@ public class FileListing {
 			Configuration conf = new Configuration();
 			FileSystem fileSystem = FileSystem.get(path.toUri(), conf);
 			RemoteIterator<LocatedFileStatus> fileStatusListIterator = fs.listFiles(path, true);
-    while(fileStatusListIterator.hasNext()){
+    while(fileStatusListIterator.hasNext()){                          //recursively displaying directories,sub-directories and the files
         LocatedFileStatus lfs = fileStatusListIterator.next();
 	System.out.println(lfs.getPath());
 		}
@@ -87,3 +87,11 @@ public class FileListing {
 		}
 	}
 }
+
+
+Problem Statement3
+Modify the previous program to take multiple HDFS paths (separated by space) and list all the
+files and sub-directories in those HDFS paths recursively.
+
+Program:
+
