@@ -56,3 +56,34 @@ Problem Statement2
 Modify the previous program to list all the files and sub-directories in the HDFS path recursively.
 
 Program:
+
+import java.io.*;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.fs.FileStatus;
+
+public class FileListing {
+	public static void main(String[] args) {
+		if (args.length != 1) {
+			System.out.println("Pass one argument");   
+			System.exit(1);
+		}
+		
+		Path path = new Path(args[0]);
+		
+		try
+		{
+			Configuration conf = new Configuration();
+			FileSystem fileSystem = FileSystem.get(path.toUri(), conf);
+			RemoteIterator<LocatedFileStatus> fileStatusListIterator = fs.listFiles(path, true);
+    while(fileStatusListIterator.hasNext()){
+        LocatedFileStatus lfs = fileStatusListIterator.next();
+	System.out.println(lfs.getPath());
+		}
+		catch (IOException e)
+		{
+            e.printStackTrace();
+		}
+	}
+}
