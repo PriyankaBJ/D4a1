@@ -48,3 +48,11 @@ public class FileListing {
 		}
 	}
 }
+
+
+
+
+Problem Statement2
+Modify the previous program to list all the files and sub-directories in the HDFS path recursively.
+
+Program:
