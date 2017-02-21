@@ -95,3 +95,36 @@ files and sub-directories in those HDFS paths recursively.
 
 Program:
 
+import java.io.*;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.fs.FileStatus;
+
+public class FileListing {
+	public static void main(String[] args) {
+		
+		Path[] path = new Path(args[args.length]);
+		for(int i=0;i<args.length;i++)     //for multiple paths
+		{
+		path[i]=new Path(args[i]);
+		try
+		{
+			Configuration conf = new Configuration();
+			FileSystem fileSystem = FileSystem.get(path[i].toUri(), conf);
+			RemoteIterator<LocatedFileStatus> fileStatusListIterator = fs.listFiles(path[i], true);
+    while(fileStatusListIterator.hasNext()){                          //recursively displaying directories,sub-directories and the files
+        LocatedFileStatus lfs = fileStatusListIterator.next();
+	System.out.println(lfs.getPath());
+		}
+			
+			
+
+		}
+		catch (IOException e)
+		{
+            e.printStackTrace();
+		}
+	}
+}
+
